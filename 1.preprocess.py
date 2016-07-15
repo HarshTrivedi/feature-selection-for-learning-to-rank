@@ -31,7 +31,13 @@ def pluck_feature_and_generate_ranking_file(input_example_file, target_directory
 
 def split_ranking_file_feature_wise(source_directory, target_directory, feature_number):
 	ranking_file = os.path.join(source_directory, "Feature{}".format(feature_number) )
-	os.system( "cd {}; awk -F ' ' '{{print $0 >> (\"f{}q\" $1)}}' {}".format(target_directory, feature_number, ranking_file) )
+
+	query_ids = set(map(lambda x: int((x.split(" ")[0]) ), open( ranking_file,'r').readlines()  ) )
+	for query_id in query_ids:
+		lines = filter( lambda x: x.startswith("{} ".format(query_id)), open(ranking_file, "r").readlines())
+		file = open( os.path.join(target_directory, "f{}q{}".format(feature_number, query_id)), "w")
+		file.writelines(lines)
+		file.close()
 
 
 def evaluate_ranking_file(source_directory, target_directory, feature_number, qrel_file_path):
@@ -54,7 +60,7 @@ for path in paths:
 	if os.path.exists(path): os.system("rm -rf {}".format(path))
 	os.makedirs(path)
 
-for feature_number in range(1, number_of_features + 1):
+for feature_number in range(1, total_number_of_features + 1):
 	print "About to process Feature {}".format(feature_number)
 	
 	input_example_file = os.path.join( root_directory, "trainingset.txt" )

@@ -12,7 +12,7 @@ import os
 from config import *
 
 
-root_directory = os.path.join(os.getcwd(), fold )
+root_directory = os.path.join(os.getcwd()  )
 output_directory = os.path.join( root_directory, "features_selected")
 
 for balancing_factor in balancing_factors:

@@ -32,7 +32,7 @@ def translate_example_file_with_selected_features(source_examples_file_path, tar
 #### --------------------------------------------------- ####
 
 	
-root_directory = os.path.join(os.getcwd(), fold )
+root_directory = os.path.join(os.getcwd() )
 feature_selection_directory = os.path.join( root_directory, "features_selected")
 for k in n:
 	for balancing_factor in balancing_factors:		
