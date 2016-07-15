@@ -82,6 +82,11 @@ As a result, you will have following 5 additional directories now:
 
 You would mainly be interested in 2 directories: `features_selected` and `feature_selected_example_files`. The former has the list of features selcted for each combination configuration from `config.py`. The later has the various versions of `trainingset.txt` and `testset.txt` (containing only the selected features) - each correspond to one of the combination configuration.
 
+* `features_selected/` contains files in this format: `<method_name>_<balancing_factor>.ranking`. For eg: `gas_0.1.ranking`
+
+* Each of these .ranking file has feature numbers line wise. So if k features are to be selected in that configuration, top k feature numbers from that file will be picked.
+
+* `feature_selected_example_files/` contains files in this format: `<method_name>_<k>_<balancing_factor>_<training_examples|testing_examples>.dat`. For example, `mmr_20_0.5_training_examples.dat`.
 
 ---
 
